@@ -1,0 +1,64 @@
+body {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 100vh;
+    background-color: #ffffff;
+}
+
+.container {
+    position: relative;
+    width: 800px;
+    height: 400px;
+}
+
+.login-container, .register-container {
+    position: absolute;
+    width: 50%;
+    height: 100%;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    transition: transform 0.4s ease-in-out, background-color 0.4s ease-in-out;
+    background-color: red;
+    padding: 20px;
+    box-sizing: border-box;
+    border-radius: 0 10px 10px 0; /* Shorthand for border-radius */
+    box-shadow: 10px 10px 50px rgba(0, 0, 0, 0.2);
+}
+
+.login-container.active, .register-container.active {
+    background-color: rgb(255, 255, 255);
+    border-radius: 10px 0 0 10px; /* Shorthand for border-radius */
+}
+
+.login-container.active .btn, .register-container.active .btn {
+    background-color: red;
+}
+
+.login-container {
+    transform: translateX(0);
+}
+
+.register-container {
+    transform: translateX(100%);
+}
+
+.login-container.active input, .register-container.active input {
+    visibility: visible;
+}
+
+input {
+    visibility: hidden;
+    margin: 10px 0;
+    padding: 10px;
+    width: 100%;
+    box-sizing: border-box;
+}
+
+.btn {
+    border-radius: 20px;
+    padding: 10px 20px;
+    cursor: pointer;
+}
