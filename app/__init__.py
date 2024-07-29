@@ -1,4 +1,5 @@
 from flask import Flask
+from flask_migrate import Migrate
 from flask_sqlalchemy import SQLAlchemy
 from flask_jwt_extended import JWTManager
 
@@ -22,6 +23,9 @@ def create_app():
 
     # Initialize JWTManager with the app
     jwt.init_app(app)
+
+    # Initialize Flask-Migrate
+    migrate = Migrate(app, db)
 
     with app.app_context():
         # Import routes blueprint
