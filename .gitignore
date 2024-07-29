@@ -1,4 +1,5 @@
 venv
+.env
 .vscode
 *cache*
-static/img/
+/instance

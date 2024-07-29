@@ -20,7 +20,7 @@ document.addEventListener('DOMContentLoaded', function() {
     const jsonData = { name: 'Mike', password: '1234' };
 
     loginBtn.addEventListener('click', () => {
-        fetch('{{ url_for("login") }}', {
+        fetch('http://127.0.0.1:5000/login', {
             method: 'POST',
             headers: {
                 'Content-Type': 'application/json; charset=utf-8'
