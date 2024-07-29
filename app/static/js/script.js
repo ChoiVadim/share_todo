@@ -17,10 +17,37 @@ function toggleContainer(container) {
 
 document.addEventListener('DOMContentLoaded', function() {
     const loginBtn = document.getElementById('loginBtn');
-    const jsonData = { name: 'Mike', password: '1234' };
+    const registerBtn = document.getElementById('registerBtn');
 
     loginBtn.addEventListener('click', () => {
+        let name = document.getElementById('username_login').value;
+        let password = document.getElementById('password_login').value;
+        const jsonData = { username: name, password: password };
+
         fetch('http://127.0.0.1:5000/login', {
+            method: 'POST',
+            headers: {
+                'Content-Type': 'application/json; charset=utf-8'
+            },
+            body: JSON.stringify(jsonData)
+        })
+        .then(response => {
+            if (!response.ok) {
+                throw new Error('Network response was not ok ' + response.statusText);
+            }
+            return response.json();
+        })
+        .then(data => alert(JSON.stringify(data)))
+        .catch(error => alert('There was a problem with the fetch operation: ' + error.message));
+    });
+
+
+    registerBtn.addEventListener('click', () => {
+        let name = document.getElementById('username_register').value;
+        let password = document.getElementById('password_register').value;
+        const jsonData = { username: name, password: password };
+
+        fetch('http://127.0.0.1:5000/register', {
             method: 'POST',
             headers: {
                 'Content-Type': 'application/json; charset=utf-8'

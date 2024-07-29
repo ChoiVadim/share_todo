@@ -10,7 +10,7 @@ class Config:
     SECRET_KEY = os.getenv("SECRET_KEY")
 
     # URI for the SQLAlchemy database connection
-    SQLALCHEMY_DATABASE_URI = "sqlite:///univdb-sqlite.db"
+    SQLALCHEMY_DATABASE_URI = os.getenv("DATABASE_URI")
 
     # SQLAlchemy setting to track modifications
     SQLALCHEMY_TRACK_MODIFICATIONS = False
@@ -23,4 +23,3 @@ class Config:
 
     # Refresh token expiration in seconds
     JWT_REFRESH_TOKEN_EXPIRES = 86400
-

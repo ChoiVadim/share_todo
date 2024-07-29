@@ -1,7 +1,9 @@
 from flask import Flask
 from flask_sqlalchemy import SQLAlchemy
+from flask_jwt_extended import JWTManager
 
 db = SQLAlchemy()
+jwt = JWTManager()
 
 
 def create_app():
@@ -17,6 +19,9 @@ def create_app():
 
     # Initialize SQLAlchemy database with the app
     db.init_app(app)
+
+    # Initialize JWTManager with the app
+    jwt.init_app(app)
 
     with app.app_context():
         # Import routes blueprint
