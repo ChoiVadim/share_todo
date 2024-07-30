@@ -1,4 +1,5 @@
 body {
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
     display: flex;
     justify-content: center;
     align-items: center;
@@ -21,7 +22,7 @@ body {
     justify-content: center;
     align-items: center;
     transition: transform 0.4s ease-in-out, background-color 0.4s ease-in-out;
-    background-color: red;
+    background-color: #007bff;
     padding: 20px;
     box-sizing: border-box;
     border-radius: 0 10px 10px 0; /* Shorthand for border-radius */
@@ -34,7 +35,7 @@ body {
 }
 
 .login-container.active .btn, .register-container.active .btn {
-    background-color: red;
+    background-color: #007bff;
 }
 
 .login-container {
@@ -45,20 +46,53 @@ body {
     transform: translateX(100%);
 }
 
-.login-container.active input, .register-container.active input {
-    visibility: visible;
-}
-
-input {
+/* Initially hide all inputs, buttons, and span elements inside login and register containers */
+input, .btn, .login-container p span, .login-container p, .register-container p span, .register-container p {
     visibility: hidden;
     margin: 10px 0;
     padding: 10px;
     width: 100%;
     box-sizing: border-box;
+    border-radius: 10px;
 }
 
+input, .btn {
+    border-width: 1px; /* Thinner border */
+    border-style: solid;
+    border-color: #000000; /* Light gray border color */
+}
+
+/* Style for buttons */
 .btn {
-    border-radius: 20px;
-    padding: 10px 20px;
+    border-radius: 10px;
     cursor: pointer;
+    padding: 10px;
+    text-align: center;
+    font-weight: bold;
+}
+
+/* Show inputs, buttons, and span elements when their container has the active class */
+.login-container.active input,
+.login-container.active .btn,
+.login-container.active p,
+.login-container.active p span,
+.register-container.active input,
+.register-container.active .btn,
+.register-container.active p span,
+.register-container.active p {
+    visibility: visible;
+}
+
+
+/* Style for the highlight text */
+.highlight {
+    visibility: hidden;
+    font-weight: bold; 
+    color: #007bff;
+    text-decoration: underline;
+    cursor: pointer;
+}
+
+p {
+    text-align: center;
 }
