@@ -1,10 +1,26 @@
-from flask import render_template, request, jsonify, Blueprint
+from flask import (
+    render_template,
+    request,
+    jsonify,
+    Blueprint,
+    session,
+    redirect,
+    url_for,
+)
 from flask_jwt_extended import create_access_token, jwt_required, get_jwt_identity
 from werkzeug.security import generate_password_hash, check_password_hash
 from .models import User, Todo
 from . import db
 
 routes = Blueprint("routes", __name__)
+
+
+@routes.route("/")
+def index():
+    if "username" in session:
+        return render_template("index.html")
+    else:
+        return redirect(url_for("routes.login"))
 
 
 @routes.route("/login", methods=["GET", "POST"])
@@ -26,7 +42,7 @@ def login():
         access_token = create_access_token(identity=user.id)
 
         # Return the access token in JSON format
-        return jsonify(access_token=access_token)
+        return jsonify(user_id=user.id, access_token=access_token)
 
 
 @routes.route("/register", methods=["POST"])
@@ -45,9 +61,12 @@ def register():
     return jsonify({"message": "Registered successfully"})
 
 
-@routes.route("/<int:user_id>", methods=["GET"])
-# @jwt_required()  # Protect this route with a JWT
+@routes.route("/<int:user_id>", methods=["GET", "POST"])
+@jwt_required()  # Protect this route with a JWT
 def show_todo_list(user_id):
+    if request.method == "GET":
+        return render_template("index.html")
+
     user = User.query.get(user_id)
 
     if not user:
@@ -61,7 +80,7 @@ def show_todo_list(user_id):
 
 
 @routes.route("/todo/<int:user_id>", methods=["POST"])
-# @jwt_required()  # Protect this route with a JWT
+@jwt_required()  # Protect this route with a JWT
 def add_todo(user_id):
     user = User.query.get(user_id)
 

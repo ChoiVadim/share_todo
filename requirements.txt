@@ -3,4 +3,5 @@ flask
 Flask-SQLAlchemy
 Flask-JWT-Extended
 Flask-Migrate
+flask_cors
 Werkzeug
